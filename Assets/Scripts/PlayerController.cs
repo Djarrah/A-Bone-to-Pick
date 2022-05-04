@@ -48,9 +48,10 @@ public class PlayerController : MonoBehaviour
     void Rotate()
     {
         Vector3 direction = new Vector3(horizontalInput, 0f, verticalInput);
-        Quaternion rotation = Quaternion.LookRotation(direction);
-        if (horizontalInput != 0 || verticalInput != 0) // prevents rotation resets
+
+        if (direction != Vector3.zero) // Prevents Vector3 zero console isues and rotation resets
         {
+            Quaternion rotation = Quaternion.LookRotation(direction);
             rb.rotation = Quaternion.Slerp(rb.rotation, rotation, rotationSpeed);
         }
     }
