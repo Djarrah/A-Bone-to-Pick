@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Movement")]
-    [SerializeField] float walkSpeed;
-    [SerializeField] float rotationSpeed;
-    [SerializeField, Tooltip("Horizontal range of the Boundary")] float xRange;
-    [SerializeField, Tooltip("Vertical range of the Boundary")] float zRange;
+    [SerializeField, Tooltip("Walking speed")]
+    float walkSpeed;
+    [SerializeField, Tooltip("Speed of the Y axis rotation when turning")]
+    float rotationSpeed;
+    [SerializeField, Tooltip("Horizontal range of the Boundary")]
+    float xRange;
+    [SerializeField, Tooltip("Vertical range of the Boundary")]
+    float zRange;
 
     Rigidbody rb;
     Boundary bounds;
