@@ -6,15 +6,20 @@ public class MeleeEnemy : Enemy
 {
     // INHERITANCE
 
+    [SerializeField] int damage;
+
     // POLYMORPHISM
     protected override void Movement()
     {
         base.Movement();
-        transform.position += Time.deltaTime * walkSpeed * transform.forward;
+
+        Approach();
     }
 
     protected override void Attack()
     {
+        base.Attack();
+        
         if (
             Physics.Raycast(
                 transform.position,
@@ -39,8 +44,6 @@ public class MeleeEnemy : Enemy
                     targetHealth.Damage(damage);
                     break;
             }
-
-            onCooldown = true;
         }
     }
 }

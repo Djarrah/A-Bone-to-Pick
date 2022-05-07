@@ -5,7 +5,6 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     [Header("Combat")]
-    [SerializeField] protected int damage;
     [SerializeField] protected float attackRange;
     [SerializeField] float attackCooldown;
     float timer = 0.0f;
@@ -14,6 +13,8 @@ public abstract class Enemy : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] protected float walkSpeed;
+    protected float distance;
+    Boundary bounds;
 
     GameObject player;
 
@@ -21,23 +22,57 @@ public abstract class Enemy : MonoBehaviour
     {
         // initializing variables
         player = GameObject.Find("Player");
+
+        // there has to be a simpler way to do this
+        bounds = GameObject.Find("Level Information").GetComponent<LevelInformation>().Boundary;
     }
 
     void Update()
     {
-        Movement();
+        // if gameover return
 
-        if (onCooldown) { RefreshAttack(); }
-        else if (PlayerInRange()) { Attack(); }
+        GetDistance();  
+        
+        Movement();
+        Constrain();
+
+        AttackRoutine();
     }
 
     bool PlayerInRange()
     {
-        float distance = Vector3.Distance(
+        return (distance <= attackRange);
+    }
+
+    protected Vector3 MoveVector()
+    {
+        return Time.deltaTime * walkSpeed * transform.forward;
+    }
+
+    void GetDistance()
+    {
+        distance = Vector3.Distance(
             player.transform.position, transform.position
             );
+    }
 
-        return (distance <= attackRange);
+    protected virtual void Movement()
+    {
+        transform.LookAt(player.transform.position);
+    }
+
+    protected void Approach()
+    {
+        transform.position += MoveVector();
+    }
+
+    void Constrain()
+    {
+        transform.position = new Vector3(
+            Mathf.Clamp(transform.position.x, bounds.xMin, bounds.xMax),
+            transform.position.y,
+            Mathf.Clamp(transform.position.z, bounds.zMin, bounds.zMax)
+            );
     }
 
     void RefreshAttack()
@@ -51,10 +86,14 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    protected virtual void Movement()
+    protected virtual void Attack()
     {
-        transform.LookAt(player.transform.position);
+        onCooldown = true;
     }
 
-    protected abstract void Attack();
+    protected virtual void AttackRoutine()
+    {
+        if (onCooldown) { RefreshAttack(); }
+        else if (PlayerInRange()) { Attack(); }
+    }
 }

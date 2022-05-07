@@ -1,3 +1,5 @@
+using UnityEngine;
+
 /* Thanks to Troy Lamerton and his top down movement script,
  * This is my version of his Boundary struct. */
 
@@ -15,5 +17,14 @@ public struct Boundary
         this.xMax = xRange;
         this.zMin = -zRange;
         this.zMax = zRange;
+    }
+
+    public bool IsInBounds(Vector3 position)
+    {
+        return (
+            xMin < position.x && position.x < xMax
+            &&
+            zMin < position.z && position.z < zMax
+            );
     }
 }

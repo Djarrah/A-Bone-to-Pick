@@ -8,12 +8,9 @@ public class PlayerController : MonoBehaviour
     float walkSpeed;
     [SerializeField, Tooltip("Speed of the Y axis rotation when turning")]
     float rotationSpeed;
-    [SerializeField, Tooltip("Horizontal range of the Boundary")]
-    float xRange;
-    [SerializeField, Tooltip("Vertical range of the Boundary")]
-    float zRange;
 
     Rigidbody rb;
+
     Boundary bounds;
 
     float horizontalInput;
@@ -24,7 +21,7 @@ public class PlayerController : MonoBehaviour
     {
         // Initializing variables
         rb = GetComponent<Rigidbody>();
-        bounds = new Boundary(xRange, zRange);
+        bounds = GameObject.Find("Level Information").GetComponent<LevelInformation>().Boundary;
     }
 
     // FixedUpdate to handle physics
@@ -34,6 +31,8 @@ public class PlayerController : MonoBehaviour
         
         GetInput();
 
+        // maybe rework in a way similar to spiral knights?
+        
         Rotate();
         Walk();
 
