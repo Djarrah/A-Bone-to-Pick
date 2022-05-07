@@ -13,7 +13,10 @@ public class MeleeEnemy : Enemy
     {
         base.Movement();
 
-        Approach();
+        if (!PlayerInRange())
+        {
+            Approach();
+        }
     }
 
     protected override void Attack()

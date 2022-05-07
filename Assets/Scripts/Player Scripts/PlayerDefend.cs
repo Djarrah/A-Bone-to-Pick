@@ -60,6 +60,7 @@ public class PlayerDefend : MonoBehaviour
         {
             shieldHealth = 0;
             shieldBroken = true;
+            StopDefend();
 
             Debug.Log("Shield Broken!");
         }

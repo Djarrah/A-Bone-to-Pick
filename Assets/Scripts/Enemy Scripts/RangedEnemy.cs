@@ -8,18 +8,20 @@ public class RangedEnemy : Enemy
     protected override void Movement()
     {
         base.Movement();
+
         KeepDistance();
     }
 
     void KeepDistance()
     {
-        if (distance > attackRange * 3 / 4)
+        if (distanceToTarget > attackRange * 3 / 4)
         {
             Approach();
         }
-        else if (distance < attackRange / 2)
+        else if (distanceToTarget < attackRange / 2)
         {
             transform.position -= MoveVector();
+            // backwards walk
         }
     }
 

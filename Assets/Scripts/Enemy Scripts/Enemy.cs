@@ -9,11 +9,12 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] float attackCooldown;
     float timer = 0.0f;
 
-    protected bool onCooldown = false;
+    protected bool stopAttacking = false;
 
     [Header("Movement")]
     [SerializeField] protected float walkSpeed;
-    protected float distance;
+    protected float distanceToTarget;
+
     Boundary bounds;
 
     GameObject player;
@@ -39,9 +40,9 @@ public abstract class Enemy : MonoBehaviour
         AttackRoutine();
     }
 
-    bool PlayerInRange()
+    protected bool PlayerInRange()
     {
-        return (distance <= attackRange);
+        return (distanceToTarget <= attackRange);
     }
 
     protected Vector3 MoveVector()
@@ -51,7 +52,7 @@ public abstract class Enemy : MonoBehaviour
 
     void GetDistance()
     {
-        distance = Vector3.Distance(
+        distanceToTarget = Vector3.Distance(
             player.transform.position, transform.position
             );
     }
@@ -64,6 +65,7 @@ public abstract class Enemy : MonoBehaviour
     protected void Approach()
     {
         transform.position += MoveVector();
+        // forward walk
     }
 
     void Constrain()
@@ -75,25 +77,27 @@ public abstract class Enemy : MonoBehaviour
             );
     }
 
-    void RefreshAttack()
+    protected void RefreshAttack()
     {
         timer += Time.deltaTime;
 
         if (timer >= attackCooldown)
         {
             timer = 0.0f;
-            onCooldown = false;
+            stopAttacking = false;
         }
     }
 
     protected virtual void Attack()
     {
-        onCooldown = true;
+        stopAttacking = true;
+        // attack ani
+        // pause move and rotation?
     }
 
     protected virtual void AttackRoutine()
     {
-        if (onCooldown) { RefreshAttack(); }
+        if (stopAttacking) { RefreshAttack(); }
         else if (PlayerInRange()) { Attack(); }
     }
 }
