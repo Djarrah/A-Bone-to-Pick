@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 2
+  attackWindup: 0.5
   attackCooldown: 2
   walkSpeed: 7
-  secondsStill: 1
   damage: 1

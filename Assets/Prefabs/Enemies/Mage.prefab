@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 10
-  attackCooldown: 3
+  attackWindup: 2
+  attackCooldown: 5
   walkSpeed: 3
-  secondsStill: 2
   projectile: {fileID: 7505032809228470536, guid: f6f42407fb27bfd498f7bc0c88c6d7f9, type: 3}

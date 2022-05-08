@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HomingProjectile : Projectile
+// Child class of the projectile, this one follows the player
+public class HomingProjectile : Projectile // INHERITANCE
 {
-    [SerializeField] float projectileLife;
+    [SerializeField, Tooltip("Seconds after which the projectile will explode")]
+    float projectileLife;
 
     GameObject homingTarget;
     
+    // POLYMORPHISM
     protected override void Start()
     {
         base.Start();
@@ -16,13 +19,15 @@ public class HomingProjectile : Projectile
         Invoke("DestroyProjectile", projectileLife);
     }
 
-    protected override  void Update()
+    // Overrides base movement, facing the player before going forward
+    protected override void Movement()
     {
         RotateToPlayer();
-        base.Update();
+        base.Movement();
     }
 
-    void RotateToPlayer()
+    // rotates towards player
+    private void RotateToPlayer()
     {
         transform.LookAt(homingTarget.transform.position);
     }

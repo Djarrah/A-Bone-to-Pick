@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// restores player health on pickup
 public class Potion : MonoBehaviour
 {
     [SerializeField, Tooltip("Amount of health to heal when picked up")]
     int heal = 1;
     
-    // health pickup
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) // activable only by player
