@@ -23,6 +23,8 @@ public abstract class Enemy : MonoBehaviour
     private float cooldownTimer = 0.0f;
     protected bool inCooldown = false;
 
+    [SerializeField] bool tracking = false;
+
     private Boundary bounds; // this level's bounds
 
     private GameObject player;
@@ -124,9 +126,14 @@ public abstract class Enemy : MonoBehaviour
     // Handles the attack itself, overridden by child classes according to needs
     protected virtual void Attack()
     {
-        transform.LookAt(player.transform);
         inCooldown = true;
         attackReady = false;
+
+        if (tracking) 
+        { 
+            transform.LookAt(player.transform); 
+        }
+
         // attack ani
         // pause move and rotation?
     }
@@ -135,14 +142,11 @@ public abstract class Enemy : MonoBehaviour
     protected void RefreshAttack()
     {
         cooldownTimer += Time.deltaTime;
-        Debug.Log("Refreshing attack!");
 
         if (cooldownTimer >= attackCooldown)
         {
             cooldownTimer = 0.0f;
             inCooldown = false;
-
-            Debug.Log("I can attack again!");
         }
     }
 

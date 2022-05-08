@@ -10,7 +10,7 @@ public class HealerEnemy : RangedEnemy // INHERITANCE
 
     // will be filled at wave spawn, in order of priority.
     // remove serializefield when waves are implemented
-    [SerializeField] GameObject[] enemiesAlive;
+    public List<GameObject> enemiesAlive;
     GameObject healingTarget = null;
 
     // POLYMORPHISIM
