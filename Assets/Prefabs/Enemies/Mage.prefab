@@ -126,8 +126,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 3
   attackRange: 10
-  attackWindup: 2
-  attackCooldown: 5
+  attackWindup: 1
+  attackCooldown: 3
   tracking: 1
   projectile: {fileID: 7505032809228470536, guid: f6f42407fb27bfd498f7bc0c88c6d7f9, type: 3}
 --- !u!54 &-4754805511434036567
