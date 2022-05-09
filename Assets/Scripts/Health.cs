@@ -6,7 +6,7 @@ public class Health : MonoBehaviour
 {
     [SerializeField, Tooltip("Maximum Health of the Creature")]
     int maxHealth = 1;
-    int health = 1;
+    int health;
 
     private void Start()
     {
@@ -51,7 +51,7 @@ public class Health : MonoBehaviour
     void Death()
     {
         Debug.Log($"{gameObject.name} has died!");
-        Destroy(gameObject);
+        gameObject.SetActive(false);
         // death animation
     }
 }

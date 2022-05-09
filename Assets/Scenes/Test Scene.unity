@@ -247,7 +247,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 539165627}
   serializedVersion: 2
-  m_Mass: 100
+  m_Mass: 0.001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed46a26d90613a4cbb75454e45716eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDuration: 0.5
+  attackDuration: 0.25
   attackRange: 1.5
   damage: 1
 --- !u!114 &539165635
@@ -282,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac635db270960f740970195afcb72637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 10
 --- !u!114 &539165636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -520,6 +520,68 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
+--- !u!1 &1443439613
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1443439614}
+  - component: {fileID: 1443439615}
+  m_Layer: 0
+  m_Name: Wave Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1443439614
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443439613}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.114347, y: -3.2674916, z: 7.113198}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1443439615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443439613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3669b47778778fc4595060ab3f01050d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  potion: {fileID: 4952127157458368113, guid: c73f47cf7b22eda428624fa817d99bc4, type: 3}
+  waves:
+  - enemyList:
+    - {fileID: 1156514081280972551, guid: 0b393b6c452722541932946f6212aded, type: 3}
+    healerInWave: 0
+  - enemyList:
+    - {fileID: 1156514081280972551, guid: 0b393b6c452722541932946f6212aded, type: 3}
+    - {fileID: 1156514081280972551, guid: 0b393b6c452722541932946f6212aded, type: 3}
+    healerInWave: 0
+  - enemyList:
+    - {fileID: 1156514081280972551, guid: 0b393b6c452722541932946f6212aded, type: 3}
+    - {fileID: 711171229060110480, guid: bac1d2da21254bf439e73ba1ac58bd85, type: 3}
+    healerInWave: 0
+  - enemyList:
+    - {fileID: 3581528392548665467, guid: 843401216c257ff429289884dbb87390, type: 3}
+    - {fileID: 711171229060110480, guid: bac1d2da21254bf439e73ba1ac58bd85, type: 3}
+    - {fileID: 1156514081280972551, guid: 0b393b6c452722541932946f6212aded, type: 3}
+    healerInWave: 1
+  enemiesAlive: []
 --- !u!1 &1719693831
 GameObject:
   m_ObjectHideFlags: 0

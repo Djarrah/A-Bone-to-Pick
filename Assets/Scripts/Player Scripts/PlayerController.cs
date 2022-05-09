@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody rb;
 
+    PlayerAttack playerAttack;
+
     Boundary bounds;
 
     float horizontalInput;
@@ -21,6 +23,7 @@ public class PlayerController : MonoBehaviour
     {
         // Initializing variables
         rb = GetComponent<Rigidbody>();
+        playerAttack = GetComponent<PlayerAttack>();
         bounds = GameObject.Find("Level Information").GetComponent<LevelInformation>().Boundary;
     }
 
@@ -44,6 +47,13 @@ public class PlayerController : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
+
+        // prevents moving if currently attacking
+        if (playerAttack.Attacking)
+        {
+            horizontalInput = 0;
+            verticalInput = 0;
+        }
     }
 
     // Rotates the player towards the direction they are headed to

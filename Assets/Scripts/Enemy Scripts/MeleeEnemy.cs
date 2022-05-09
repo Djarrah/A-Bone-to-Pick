@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeEnemy : Enemy
+// Class for enemies who attack in melee range with weapons
+public class MeleeEnemy : Enemy // INHERITANCE
 {
-    // INHERITANCE
-
-    [SerializeField] int damage;
+    [SerializeField, Tooltip("Health removed with each hit")]
+    int damage;
 
     // POLYMORPHISM
+    // Overrides the base method approaching the player until in melee range
     protected override void Movement()
     {
         base.Movement();
@@ -19,6 +20,7 @@ public class MeleeEnemy : Enemy
         }
     }
 
+    // Overrides the base method using a Raycast to attack in melee
     protected override void Attack()
     {
         base.Attack();

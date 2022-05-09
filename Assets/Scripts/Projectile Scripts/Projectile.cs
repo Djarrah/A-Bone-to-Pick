@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Used by projectiles going forward
 public class Projectile : MonoBehaviour
 {
     [SerializeField] bool friendlyFire = false;
@@ -17,27 +18,28 @@ public class Projectile : MonoBehaviour
         bounds = GameObject.Find("Level Information").GetComponent<LevelInformation>().Boundary;
     }
 
-    protected virtual void Update()
+    private void Update()
     {
         Movement();
         DestroyOutOfBounds();
     }
 
-    void OnTriggerEnter(Collider other)
+    // Damages those who come in contact with the projectile
+    private void OnTriggerEnter(Collider other)
     {
         GameObject target = other.gameObject;
 
         switch (target.tag)
         {
-            case "Shield":
+            case "Shield": // the shield, if raised...
                 target.transform.parent.gameObject.GetComponent<PlayerDefend>().DamageShield(damage);
                 break;
 
-            case "Player":
+            case "Player": // the player...
                 target.GetComponent<Health>().Damage(damage);
                 break;
 
-            case "Enemy":
+            case "Enemy": // even enemies if friendly fire is enabled for this projectile!
                 if (friendlyFire)
                 {
                     target.GetComponent<Health>().Damage(damage);
@@ -45,20 +47,24 @@ public class Projectile : MonoBehaviour
                 break;
         }
 
-        DestroyProjectile();
+        DestroyProjectile(); // pops the projectile on every hit, even a wall
     }
 
+    // The way the projectile pops
     protected void DestroyProjectile()
     {
         // effects
         Destroy(gameObject);
     }
-    void Movement()
+    
+    // Moves forward, overridden by the homing variant
+    protected virtual void Movement()
     {
         transform.position += Time.deltaTime * projectileSpeed * transform.forward;
     }
 
-    void DestroyOutOfBounds()
+    // Destroys the projectile if it goes out of bounds
+    private void DestroyOutOfBounds()
     {
         if (!bounds.IsInBounds(transform.position))
         {
