@@ -563,6 +563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3669b47778778fc4595060ab3f01050d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  potion: {fileID: 4952127157458368113, guid: c73f47cf7b22eda428624fa817d99bc4, type: 3}
   waves:
   - enemyList:
     - {fileID: 1156514081280972551, guid: 0b393b6c452722541932946f6212aded, type: 3}

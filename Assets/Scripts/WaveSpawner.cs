@@ -14,8 +14,10 @@ public class WaveSpawner : MonoBehaviour
         public bool healerInWave;
     }
 
+    [SerializeField] GameObject potion;
+    
     [SerializeField] EnemyWave[] waves;
-    public List<GameObject> enemiesAlive { get; private set; }
+    public List<GameObject> enemiesAlive;
 
     int waveNumber = 0;
 
@@ -37,7 +39,7 @@ public class WaveSpawner : MonoBehaviour
             enemiesAlive.Add(
                 Instantiate(
                     enemy,
-                    RandomPosition(bounds),
+                    RandomPosition(),
                     enemy.transform.rotation
                     )
                 )            ;
@@ -54,10 +56,12 @@ public class WaveSpawner : MonoBehaviour
                 healer.enemiesAlive.Add(activeEnemy);
             }
         }
+
+        Instantiate(potion, RandomPosition(), potion.transform.rotation);
     }
 
     // generates a random position within bounds
-    Vector3 RandomPosition(Boundary bounds)
+    Vector3 RandomPosition()
     {
         float randomX = Random.Range(bounds.xMin, bounds.xMax);
         float randomZ = Random.Range(bounds.zMin, bounds.zMax);
