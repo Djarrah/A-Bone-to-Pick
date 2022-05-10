@@ -33,6 +33,7 @@ public class MainMenu : MonoBehaviour
     {
         // Until the arena is finished, we'll use the test scene instead
         SceneManager.LoadScene(3); // Swap to 1 when arena is finished
+        gameManager.GameActive = true;
     }
 
     // loads the global leaderboard
@@ -49,9 +50,9 @@ public class MainMenu : MonoBehaviour
     }
 
     // Toggles cutscenes on and off
-    public void ToggleCutscenes(bool toggle)
+    public void ToggleCutscenes()
     {
-        gameManager.Cutscenes = toggle;
+        gameManager.Cutscenes = cutscenesToggle.isOn;
     }
 
     // return back to the title screen

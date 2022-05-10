@@ -30,6 +30,4 @@ public class AudioManager : MonoBehaviour
         mixer.SetFloat("SFXVolume", Mathf.Log10(sliderValue) * 20);
         PlayerPrefs.SetFloat("SFXVolume", sliderValue);
     }
-
-    // revise
 }
