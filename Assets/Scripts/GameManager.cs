@@ -5,32 +5,23 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public bool GameActive = true;
+    public bool GameOver = false;
+    public bool GameWon = false;
 
-    [SerializeField] Text timeText;
-    float time; // will be converted into mm:ss for the score
-
-    [HideInInspector] public bool Cutscenes = true;
-    public bool GameActive = false;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-
-        DontDestroyOnLoad(this);
-    }
+    [SerializeField] GameObject pauseText;
 
     private void Update()
     {
-        if (GameActive) { TimeAdvances(); }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseGame();
+        }
     }
 
-    private void TimeAdvances()
+    void PauseGame()
     {
-        time += Time.deltaTime;
-        timeText.text = $"Time: {time}";
+        GameActive = !GameActive;
+        pauseText.SetActive(!pauseText.activeSelf);
     }
 }

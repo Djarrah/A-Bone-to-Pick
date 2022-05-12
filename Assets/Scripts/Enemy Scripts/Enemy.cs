@@ -28,21 +28,21 @@ public abstract class Enemy : MonoBehaviour
     private Boundary bounds; // this level's bounds
 
     private GameObject player;
+    private GameManager gameManager;
 
     // Called before the first frame, when script is initialized
     private void Start()
     {
         // initializing variables
         player = GameObject.Find("Player");
-
-        // there has to be a simpler way to do this
         bounds = GameObject.Find("Level Information").GetComponent<LevelInformation>().Boundary;
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     // Called at each frame
     private void Update()
     {
-        // if gameover return
+        if (!gameManager.GameActive) { return; }
 
         GetDistance();
 

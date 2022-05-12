@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     float horizontalInput;
     float verticalInput;
 
+    GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,11 +27,18 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         playerAttack = GetComponent<PlayerAttack>();
         bounds = GameObject.Find("Level Information").GetComponent<LevelInformation>().Boundary;
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     // FixedUpdate to handle physics
     void FixedUpdate()
     {
+        if (!gameManager.GameActive)
+        { 
+            rb.velocity = Vector3.zero;
+            return;
+        }
+        
         // ABSTRACTION
         
         GetInput();
@@ -68,7 +77,7 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    // Moves the player following input system. Thanks to Troy Lamerton
+    // Moves the player following input system.
     void Walk()
     {
         rb.velocity = new Vector3(
@@ -78,7 +87,7 @@ public class PlayerController : MonoBehaviour
             );
     }
 
-    // Constrains the player in the given Boundary. Thanks to Troy Lamerton
+    // Constrains the player in the given Boundary.
     void Constrain()
     {
         rb.position = new Vector3(

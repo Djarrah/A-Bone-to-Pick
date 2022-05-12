@@ -14,26 +14,13 @@ public class MainMenu : MonoBehaviour
 
     [Header("Options Screen")]
     [SerializeField] GameObject optionsScreen;
-    [SerializeField] Toggle cutscenesToggle;
     [SerializeField] Button titleButton;
-
-    GameManager gameManager;
-
-    private void Start()
-    {
-        // initializing variables
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-
-        // sets the cutscene toggle's state to the one saved in the gamemanager
-        cutscenesToggle.isOn = gameManager.Cutscenes;
-    }
 
     // Loads the game proper
     public void StartGame()
     {
         // Until the arena is finished, we'll use the test scene instead
         SceneManager.LoadScene(3); // Swap to 1 when arena is finished
-        gameManager.GameActive = true;
     }
 
     // loads the global leaderboard
@@ -47,12 +34,6 @@ public class MainMenu : MonoBehaviour
     {
         titleScreen.SetActive(false);
         optionsScreen.SetActive(true);
-    }
-
-    // Toggles cutscenes on and off
-    public void ToggleCutscenes()
-    {
-        gameManager.Cutscenes = cutscenesToggle.isOn;
     }
 
     // return back to the title screen

@@ -8,7 +8,7 @@ public class Health : MonoBehaviour
     int maxHealth = 1;
     int health;
 
-    private void Start()
+    protected virtual void Start()
     {
         health = maxHealth; // Sets health to full
     }
@@ -44,11 +44,11 @@ public class Health : MonoBehaviour
             Death();
         }
 
-        // maybe trigger hurt animation?
+        // trigger hurt animation
     }
 
     // to be completed
-    void Death()
+    protected virtual void Death()
     {
         Debug.Log($"{gameObject.name} has died!");
         gameObject.SetActive(false);
