@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,15 +13,13 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool GameWon = false;
     [HideInInspector] public bool GameLost = false;
 
-    int score;
     string playerName;
+    int score;
 
     [SerializeField] GameObject pauseText;
     [SerializeField] GameObject gameOverText;
     [SerializeField] GameObject winText;
-
     [SerializeField] Text playerNameText;
-
     [SerializeField] Score scoreScript;
 
     private void Awake()
@@ -71,12 +70,12 @@ public class GameManager : MonoBehaviour
         GameWon = true;
 
         winText.SetActive(true);
-
-        score = scoreScript.Seconds;
     }
 
     public void SubmitScore()
     {
+        // maybe they're better as local var?
         playerName = playerNameText.text;
+        score = scoreScript.Seconds;
     }
 }
