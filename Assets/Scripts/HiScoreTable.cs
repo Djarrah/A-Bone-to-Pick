@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -23,19 +22,7 @@ public class HiScoreTable : MonoBehaviour
     {
         gameManager = GameManager.Instance;
         
-        hiScoreEntryList = new List<HiScoreEntry>()
-        {
-            new HiScoreEntry{name = "AAA", score = 3355},
-            new HiScoreEntry{name = "AAA", score = 3355},
-            new HiScoreEntry{name = "AAA", score = 3355},
-            new HiScoreEntry{name = "AAA", score = 3355},
-            new HiScoreEntry{name = "AAA", score = 3355},
-            new HiScoreEntry{name = "AAA", score = 3355},
-            new HiScoreEntry{name = "AAA", score = 3355},
-            new HiScoreEntry{name = "AAA", score = 3355},
-            new HiScoreEntry{name = "AAA", score = 3355},
-            new HiScoreEntry{name = "AAA", score = 3355}
-        };
+        LoadData();
 
         if (gameManager != null)
         {
@@ -45,6 +32,8 @@ public class HiScoreTable : MonoBehaviour
 
         hiScoreEntryList = hiScoreEntryList.OrderBy(e => e.score).ToList();
         TrimList();
+
+        SaveData();
 
         transformList = new List<Transform>();
         DrawTable();
@@ -88,23 +77,44 @@ public class HiScoreTable : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    public void ResetLeaderBoard()
+    {
+        PlayerPrefs.DeleteKey("Leaderboard");
+        SceneManager.LoadScene(2);
+    }
+
     void SaveData()
     {
         HiScores hiScores = new HiScores { hiScoreList = hiScoreEntryList};
         string json = JsonUtility.ToJson(hiScores);
 
-        File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
+        PlayerPrefs.SetString("Leaderboard", json);
+        PlayerPrefs.Save();
     }
 
     void LoadData()
     {
-        string path = Application.persistentDataPath + "/savefile.json";
-
-        if (File.Exists(path))
+        if (PlayerPrefs.HasKey("Leaderboard"))
         {
-            string json = File.ReadAllText(path);
+            string json = PlayerPrefs.GetString("Leaderboard");
             HiScores hiScores = JsonUtility.FromJson<HiScores>(json);
             hiScoreEntryList = hiScores.hiScoreList;
+        }
+        else
+        {
+            hiScoreEntryList = new List<HiScoreEntry>()
+            {
+                new HiScoreEntry{name = "AAA", score = 3355},
+                new HiScoreEntry{name = "AAA", score = 3355},
+                new HiScoreEntry{name = "AAA", score = 3355},
+                new HiScoreEntry{name = "AAA", score = 3355},
+                new HiScoreEntry{name = "AAA", score = 3355},
+                new HiScoreEntry{name = "AAA", score = 3355},
+                new HiScoreEntry{name = "AAA", score = 3355},
+                new HiScoreEntry{name = "AAA", score = 3355},
+                new HiScoreEntry{name = "AAA", score = 3355},
+                new HiScoreEntry{name = "AAA", score = 3355}
+            };
         }
     }
 
