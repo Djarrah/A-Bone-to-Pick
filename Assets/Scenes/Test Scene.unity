@@ -271,7 +271,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 369820415}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1064967567}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SubmitScore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &369820415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1018,7 +1030,7 @@ MonoBehaviour:
   m_LineType: 0
   m_HideMobileInput: 0
   m_CharacterValidation: 0
-  m_CharacterLimit: 0
+  m_CharacterLimit: 3
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls: []
@@ -1191,6 +1203,9 @@ MonoBehaviour:
   winText: {fileID: 1859296270}
   playerNameText: {fileID: 2003651207}
   scoreScript: {fileID: 623335811}
+  RunScore:
+    score: 0
+    name: 
 --- !u!4 &1064967568
 Transform:
   m_ObjectHideFlags: 0
@@ -1515,19 +1530,6 @@ MonoBehaviour:
   - enemyList:
     - {fileID: 1156514081280972551, guid: 0b393b6c452722541932946f6212aded, type: 3}
     healerInWave: 0
-  - enemyList:
-    - {fileID: 1156514081280972551, guid: 0b393b6c452722541932946f6212aded, type: 3}
-    - {fileID: 1156514081280972551, guid: 0b393b6c452722541932946f6212aded, type: 3}
-    healerInWave: 0
-  - enemyList:
-    - {fileID: 1156514081280972551, guid: 0b393b6c452722541932946f6212aded, type: 3}
-    - {fileID: 711171229060110480, guid: bac1d2da21254bf439e73ba1ac58bd85, type: 3}
-    healerInWave: 0
-  - enemyList:
-    - {fileID: 3581528392548665467, guid: 843401216c257ff429289884dbb87390, type: 3}
-    - {fileID: 711171229060110480, guid: bac1d2da21254bf439e73ba1ac58bd85, type: 3}
-    - {fileID: 1156514081280972551, guid: 0b393b6c452722541932946f6212aded, type: 3}
-    healerInWave: 1
   enemiesAlive: []
 --- !u!1 &1719693831
 GameObject:

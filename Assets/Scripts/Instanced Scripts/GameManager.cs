@@ -13,14 +13,15 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool GameWon = false;
     [HideInInspector] public bool GameLost = false;
 
-    string playerName;
-    int score;
-
     [SerializeField] GameObject pauseText;
     [SerializeField] GameObject gameOverText;
     [SerializeField] GameObject winText;
+
     [SerializeField] Text playerNameText;
+
     [SerializeField] Score scoreScript;
+
+    public HiScoreEntry RunScore;
 
     private void Awake()
     {
@@ -74,8 +75,17 @@ public class GameManager : MonoBehaviour
 
     public void SubmitScore()
     {
-        // maybe they're better as local var?
-        playerName = playerNameText.text;
-        score = scoreScript.Seconds;
+        string playerName = playerNameText.text;
+        playerName = playerName.ToUpper();
+
+        int score = scoreScript.Seconds;
+
+        RunScore = new HiScoreEntry { name = playerName, score = score };
+        SceneManager.LoadScene(2);
+    }
+
+    public void SelfDestruct()
+    {
+        Destroy(gameObject);
     }
 }
