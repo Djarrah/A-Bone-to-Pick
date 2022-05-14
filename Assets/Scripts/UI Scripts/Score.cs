@@ -6,27 +6,23 @@ using UnityEngine.UI;
 public class Score : MonoBehaviour
 {
     Text timeText;
-    float time; // will be converted into seconds integers
-    int seconds; // will be converted into mm:ss for the score
-
-    GameManager gameManager;
+    float time;
+    public int Seconds { get; private set; } // ENCAPSULATION
 
     private void Start()
     {
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-
         timeText = GetComponent<Text>();
     }
 
     private void Update()
     {
-        if (gameManager.GameActive) { TimeAdvances(); }
+        if (GameManager.Instance.GameActive) { TimeAdvances(); }
     }
 
     private void TimeAdvances()
     {
         time += Time.deltaTime;
-        seconds = (int)time;
-        timeText.text = $"Time: {seconds}";
+        Seconds = (int)time;
+        timeText.text = $"Time: {Seconds}";
     }
 }

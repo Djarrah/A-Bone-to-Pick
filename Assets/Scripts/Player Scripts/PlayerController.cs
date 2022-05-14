@@ -18,22 +18,19 @@ public class PlayerController : MonoBehaviour
     float horizontalInput;
     float verticalInput;
 
-    GameManager gameManager;
-
     // Start is called before the first frame update
     void Start()
     {
         // Initializing variables
         rb = GetComponent<Rigidbody>();
         playerAttack = GetComponent<PlayerAttack>();
-        bounds = GameObject.Find("Level Information").GetComponent<LevelInformation>().Boundary;
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        bounds = LevelInformation.Instance.Bounds;
     }
 
     // FixedUpdate to handle physics
     void FixedUpdate()
     {
-        if (!gameManager.GameActive)
+        if (!GameManager.Instance.GameActive)
         { 
             rb.velocity = Vector3.zero;
             return;

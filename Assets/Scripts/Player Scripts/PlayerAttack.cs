@@ -16,21 +16,18 @@ public class PlayerAttack : MonoBehaviour
     int damage = 1;
 
     public bool Attacking { get; private set; } = false; // ENCAPSULATION
-
-    GameManager gameManager;
     
     // Start is called before the first frame update
     void Start()
     {
         // initializes variables
         playerDefend = GetComponent<PlayerDefend>();
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!gameManager.GameActive) { return; }
+        if (!GameManager.Instance.GameActive) { return; }
         
         if (Input.GetKeyDown(KeyCode.Space) && CanAttack())
         {

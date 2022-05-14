@@ -10,14 +10,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] int damage = 1;
 
     [SerializeField] float projectileSpeed = 1;
-
-    Boundary bounds;
-
-    protected virtual void Start()
-    {
-        bounds = GameObject.Find("Level Information").GetComponent<LevelInformation>().Boundary;
-    }
-
+    
     private void Update()
     {
         Movement();
@@ -66,7 +59,7 @@ public class Projectile : MonoBehaviour
     // Destroys the projectile if it goes out of bounds
     private void DestroyOutOfBounds()
     {
-        if (!bounds.IsInBounds(transform.position))
+        if (!LevelInformation.Instance.Bounds.IsInBounds(transform.position))
         {
             Destroy(gameObject);
         }

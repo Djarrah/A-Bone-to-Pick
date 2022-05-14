@@ -23,14 +23,11 @@ public class PlayerDefend : MonoBehaviour
     public bool Defending { get; private set; } = false; // ENCAPSULATION
     bool shieldBroken = false;
 
-    GameManager gameManager;
-
     void Start()
     {
         // initializing variables
         shieldArea = transform.GetChild(0).gameObject;
         playerAttack = GetComponent<PlayerAttack>();
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
         // replenishes shield
         shieldHealth = shieldHealthMax;
@@ -39,7 +36,7 @@ public class PlayerDefend : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!gameManager.GameActive) { return; }
+        if (!GameManager.Instance.GameActive) { return; }
         
         if (Input.GetKey(KeyCode.LeftShift) && CanDefend())
         {

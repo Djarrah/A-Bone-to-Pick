@@ -35,8 +35,8 @@ public abstract class Enemy : MonoBehaviour
     {
         // initializing variables
         player = GameObject.Find("Player");
-        bounds = GameObject.Find("Level Information").GetComponent<LevelInformation>().Boundary;
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        bounds = LevelInformation.Instance.Bounds;
+        gameManager = GameManager.Instance;
     }
 
     // Called at each frame

@@ -22,12 +22,10 @@ public class WaveSpawner : MonoBehaviour
     int waveNumber = 0;
 
     Boundary bounds;
-    GameManager gameManager;
 
     private void Start()
     {
-        bounds = GameObject.Find("Level Information").GetComponent<LevelInformation>().Boundary;
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        bounds = LevelInformation.Instance.Bounds;
 
         SpawnWave(waves[waveNumber++]);
         Invoke("WaveRefresher", 1);
@@ -74,8 +72,6 @@ public class WaveSpawner : MonoBehaviour
     // to be called every second or so
     void WaveRefresher()
     {
-        if (gameManager.GameOver) { return; }
-        
         if (WaveOver())
         {
             foreach (GameObject enemy in enemiesAlive)
@@ -91,9 +87,8 @@ public class WaveSpawner : MonoBehaviour
             }
             else
             {
-                gameManager.GameActive = false;
-                gameManager.GameWon = true;
-                Debug.Log("Congratulations, all waves cleared!");
+                GameManager.Instance.WinGame();
+
                 return;
             }
         }

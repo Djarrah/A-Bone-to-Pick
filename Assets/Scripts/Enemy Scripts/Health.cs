@@ -8,7 +8,7 @@ public class Health : MonoBehaviour
     int maxHealth = 1;
     int health;
 
-    protected virtual void Start()
+    private void Start()
     {
         health = maxHealth; // Sets health to full
     }

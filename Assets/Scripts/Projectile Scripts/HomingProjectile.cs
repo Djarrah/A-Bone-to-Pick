@@ -11,9 +11,8 @@ public class HomingProjectile : Projectile // INHERITANCE
     GameObject homingTarget;
     
     // POLYMORPHISM
-    protected override void Start()
+    void Start()
     {
-        base.Start();
         homingTarget = GameObject.Find("Player");
 
         Invoke("DestroyProjectile", projectileLife);
