@@ -17,7 +17,7 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] GameObject potion;
     
     [SerializeField] EnemyWave[] waves;
-    public List<GameObject> enemiesAlive;
+    [HideInInspector] public List<GameObject> enemiesAlive;
 
     int waveNumber = 0;
 

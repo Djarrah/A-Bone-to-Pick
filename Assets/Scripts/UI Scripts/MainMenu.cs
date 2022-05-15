@@ -6,15 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    [Header("Title Screen")]
     [SerializeField] GameObject titleScreen;
-    [SerializeField] Button startButton;
-    [SerializeField] Button leaderboardButton;
-    [SerializeField] Button optionsButton;
-
-    [Header("Options Screen")]
     [SerializeField] GameObject optionsScreen;
-    [SerializeField] Button titleButton;
+    [SerializeField] GameObject controlsScreen;
 
     // Loads the game proper
     public void StartGame()
@@ -41,5 +35,17 @@ public class MainMenu : MonoBehaviour
     {
         titleScreen.SetActive(true);
         optionsScreen.SetActive(false);
+    }
+
+    public void ShowControls()
+    {
+        titleScreen.SetActive(false);
+        controlsScreen.SetActive(true);
+    }
+
+    public void BackToTitleFromControls()
+    {
+        titleScreen.SetActive(true);
+        controlsScreen.SetActive(false);
     }
 }

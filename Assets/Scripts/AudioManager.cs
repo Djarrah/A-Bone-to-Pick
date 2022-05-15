@@ -8,7 +8,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] Slider BGMSlider; 
     [SerializeField] Slider SFXSlider;
 
-    private void Start()
+    private void Awake()
     {
         // Gets the volumes from playerprefs and sets them
         BGMSlider.value = PlayerPrefs.GetFloat("BGMVolume", 0.5f);

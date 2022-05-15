@@ -75,9 +75,7 @@ public class GameManager : MonoBehaviour
 
     public void SubmitScore()
     {
-        string playerName = playerNameText.text;
-        playerName = playerName.ToUpper();
-
+        string playerName = playerNameText.text.ToUpper();
         int score = scoreScript.Seconds;
 
         RunScore = new HiScoreEntry { name = playerName, score = score };
