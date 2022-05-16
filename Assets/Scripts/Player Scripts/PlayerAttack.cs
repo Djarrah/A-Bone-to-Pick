@@ -4,24 +4,31 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    PlayerDefend playerDefend;
-
     [SerializeField, Tooltip("Duration of the attack")]
-    float attackDuration = 0.25f; // edit depending on model animation
+    float attackDuration = 0.25f;
     float timer = 0.0f;
+    
+    /* Legacy section
     [SerializeField, Tooltip("Range of the attack")]
     float attackRange = 1.0f;
 
     [SerializeField, Tooltip("Damage inflicted with each hit")]
     int damage = 1;
+    */
+
+    [SerializeField] GameObject sword;
 
     public bool Attacking { get; private set; } = false; // ENCAPSULATION
-    
+
+    Animator animator;
+    PlayerDefend playerDefend;
+
     // Start is called before the first frame update
     void Start()
     {
         // initializes variables
         playerDefend = GetComponent<PlayerDefend>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -31,7 +38,8 @@ public class PlayerAttack : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Space) && CanAttack())
         {
-            Attack();
+            // Attack(); Legacy
+            SwordAttack();
         }
 
         if (Attacking)
@@ -46,11 +54,11 @@ public class PlayerAttack : MonoBehaviour
         return (!playerDefend.Defending && !Attacking);
     }
 
-    // project a raycast to attack
+    /* project a raycast to attack, legacy
     void Attack()
     {
-        //attack ani here
         Attacking = true;
+        animator.SetTrigger("attacking");
 
         Vector3 origin = transform.position;
         Vector3 direction = transform.forward;
@@ -64,13 +72,17 @@ public class PlayerAttack : MonoBehaviour
             if (targetHealth == null) { return; } // prevents damaging invincible colliders
 
             targetHealth.Damage(damage);
+        }
+    }
+    */
 
-            Debug.DrawLine(origin, hit.point, Color.red, 0.25f);
-        }
-        else 
-        { 
-            Debug.DrawLine(origin, origin + direction * attackRange, Color.green, 0.25f);
-        }
+    // activates the sword's hitbox
+    void SwordAttack()
+    {
+        Attacking = true;
+        animator.SetTrigger("attacking");
+
+        sword.SetActive(Attacking);
     }
 
     // makes player able to attack after a duration
@@ -82,6 +94,8 @@ public class PlayerAttack : MonoBehaviour
         {
             timer = 0.0f;
             Attacking = false;
+
+            sword.SetActive(Attacking);
         }
     }
 }

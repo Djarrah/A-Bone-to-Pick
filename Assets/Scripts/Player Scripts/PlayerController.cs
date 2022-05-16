@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     float rotationSpeed;
 
     Rigidbody rb;
+    Animator animator;
 
     PlayerAttack playerAttack;
 
@@ -24,10 +25,19 @@ public class PlayerController : MonoBehaviour
         // Initializing variables
         rb = GetComponent<Rigidbody>();
         playerAttack = GetComponent<PlayerAttack>();
+        animator = GetComponentInChildren<Animator>();
+
         bounds = LevelInformation.Instance.Bounds;
     }
 
-    // FixedUpdate to handle physics
+    // Called once per frame
+    private void Update()
+    {
+        GetInput();
+        ControlAnimator();
+    }
+
+    // Handles physics
     void FixedUpdate()
     {
         if (!GameManager.Instance.GameActive)
@@ -37,14 +47,8 @@ public class PlayerController : MonoBehaviour
         }
         
         // ABSTRACTION
-        
-        GetInput();
-
-        // maybe rework in a way similar to spiral knights?
-        
         Rotate();
         Walk();
-
         Constrain();
     }
 
@@ -60,6 +64,12 @@ public class PlayerController : MonoBehaviour
             horizontalInput = 0;
             verticalInput = 0;
         }
+    }
+
+    // Sets the animator's parameters
+    void ControlAnimator()
+    {
+        animator.SetFloat("moveSpeed", rb.velocity.sqrMagnitude);
     }
 
     // Rotates the player towards the direction they are headed to
