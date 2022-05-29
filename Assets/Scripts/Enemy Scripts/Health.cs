@@ -17,11 +17,14 @@ public class Health : MonoBehaviour
     [SerializeField] Renderer[] renderers;
 
     protected Animator animator;
+    [SerializeField] GameObject explosion;
+    ParticleSystem healingVFX;
 
     private void Start()
     {
         health = maxHealth; // Sets health to full
         animator = GetComponentInChildren<Animator>();
+        healingVFX = GetComponentInChildren<ParticleSystem>();
     }
 
     private void Update()
@@ -79,7 +82,7 @@ public class Health : MonoBehaviour
             health = maxHealth;
         }
 
-        // heal fx around target?
+        healingVFX.Play();
     }
 
     // depletes the given amount of health
@@ -103,10 +106,7 @@ public class Health : MonoBehaviour
     protected virtual void Death()
     {
         Debug.Log($"{gameObject.name} has died!");
-        if (animator != null) // DEBUG
-        {
-            animator.SetBool("dead", true);
-        }
+        animator.SetBool("dead", true);
 
         StartCoroutine(PostDeath());
     }
@@ -118,7 +118,11 @@ public class Health : MonoBehaviour
 
         yield return new WaitForSeconds(2);
 
-        // smoke puff
+        GameObject deathExplosion = Instantiate(explosion, transform.position, transform.rotation);
+
+        yield return new WaitForSeconds(0.5f);
+
+        Destroy(deathExplosion);
         gameObject.SetActive(false);
     }
 }

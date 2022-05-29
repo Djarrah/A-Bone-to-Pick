@@ -9,7 +9,6 @@ public class HealerEnemy : RangedEnemy // INHERITANCE
     int healingValue;
 
     // will be filled at wave spawn, in order of priority.
-    // remove serializefield when waves are implemented
     public List<GameObject> enemiesAlive;
     GameObject healingTarget = null;
 
@@ -22,7 +21,7 @@ public class HealerEnemy : RangedEnemy // INHERITANCE
             ChooseTarget();
         }
         // Resets target if ally has died during the windup
-        else if (!healingTarget.activeSelf) 
+        else if (healingTarget.GetComponent<Enemy>().Dead) 
         {
             healingTarget = null;
         }
@@ -43,7 +42,7 @@ public class HealerEnemy : RangedEnemy // INHERITANCE
     {
         foreach (GameObject enemy in enemiesAlive)
         {
-            if (!enemy.GetComponent<Health>().IsFullyHealed())
+            if (!enemy.GetComponent<Health>().IsFullyHealed() && !enemy.GetComponent<Enemy>().Dead)
             {
                 healingTarget = enemy;
                 return;
@@ -58,8 +57,9 @@ public class HealerEnemy : RangedEnemy // INHERITANCE
     {
         if (attackReady)
         {
-            // healani
+            animator.SetTrigger("attack");
             healingTarget.GetComponent<Health>().Heal(healingValue);
+            healingTarget = null;
 
             inCooldown = true;
             attackReady = false;

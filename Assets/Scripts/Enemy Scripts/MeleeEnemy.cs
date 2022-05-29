@@ -12,6 +12,13 @@ public class MeleeEnemy : Enemy // INHERITANCE
     bool friendlyFire = false;
 
     // POLYMORPHISM
+    protected override void MovementRoutine()
+    {
+        if (inCooldown) { return; }
+        
+        base.MovementRoutine();
+    }
+
     // Overrides the base method approaching the player until in melee range
     protected override void Movement()
     {

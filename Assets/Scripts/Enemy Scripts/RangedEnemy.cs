@@ -21,11 +21,12 @@ public class RangedEnemy : Enemy // INHERITANCE
         if (distanceToTarget > attackRange * 3 / 4)
         {
             Approach();
+            animator.SetFloat("direction", 1);
         }
         else if (distanceToTarget < attackRange / 2)
         {
             transform.position -= MoveVector();
-            // backwards walk ani
+            animator.SetFloat("direction", 0);
         }
     }
 

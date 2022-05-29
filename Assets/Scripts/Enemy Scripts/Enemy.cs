@@ -48,6 +48,9 @@ public abstract class Enemy : MonoBehaviour
     // Called at each frame
     private void Update()
     {
+        AnimatorStatus();
+        formerPosition = transform.position;
+
         if (!gameManager.GameActive) { return; }
         if (Dead) { return; }
 
@@ -56,8 +59,6 @@ public abstract class Enemy : MonoBehaviour
         MovementRoutine();
 
         AttackRoutine();
-
-        AnimatorStatus();
     }
 
     // Simply sets the distance between Enemy and Player
@@ -69,12 +70,8 @@ public abstract class Enemy : MonoBehaviour
     }
 
     // If player is not winding up an attack, moves according to its pattern and gets constrained by bounds
-    private void MovementRoutine()
+    protected virtual void MovementRoutine()
     {
-        formerPosition = transform.position;
-
-        if (inCooldown) { return; }
-
         if (inWindup) { WindupAttack(); }
         else
         {
