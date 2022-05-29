@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField, Tooltip("Maximum Health of the Creature")]
-    int maxHealth = 1;
-    int health;
+    [SerializeField] int maxHealth = 1;
+    protected int health;
 
     bool invulnerable = false;
 
@@ -19,7 +18,7 @@ public class Health : MonoBehaviour
 
     protected Animator animator;
 
-    private void Start()
+    protected virtual void Start()
     {
         health = maxHealth; // Sets health to full
         animator = GetComponentInChildren<Animator>();
@@ -70,7 +69,7 @@ public class Health : MonoBehaviour
     }
     
     // replenishes the given amount of health
-    public void Heal(int amount = 1)
+    public virtual void Heal(int amount = 1)
     {
         health += amount;
         Debug.Log($"{name}'s health: {health}");
@@ -84,7 +83,7 @@ public class Health : MonoBehaviour
     }
 
     // depletes the given amount of health
-    public void Damage(int amount = 1)
+    public virtual void Damage(int amount = 1)
     {
         if (invulnerable) { return; }
 

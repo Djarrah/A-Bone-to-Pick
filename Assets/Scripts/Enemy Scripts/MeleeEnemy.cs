@@ -8,6 +8,9 @@ public class MeleeEnemy : Enemy // INHERITANCE
     [SerializeField, Tooltip("Health removed with each hit")]
     int damage;
 
+    [SerializeField, Tooltip("Can this enemy hit their allies?")]
+    bool friendlyFire = false;
+
     // POLYMORPHISM
     // Overrides the base method approaching the player until in melee range
     protected override void Movement()
@@ -40,13 +43,18 @@ public class MeleeEnemy : Enemy // INHERITANCE
             switch (target.tag)
             {
                 case "Shield":
-                    PlayerDefend targetShield = target.transform.parent.gameObject.GetComponent<PlayerDefend>();
-                    targetShield.DamageShield(damage);
+                    target.transform.parent.gameObject.GetComponent<PlayerDefend>().DamageShield(damage);
                     break;
 
                 case "Player":
-                    Health targetHealth = target.GetComponent<Health>();
-                    targetHealth.Damage(damage);
+                    target.GetComponent<Health>().Damage(damage);
+                    break;
+
+                case "Enemy":
+                    if (friendlyFire)
+                    {
+                        target.GetComponent<Health>().Damage(damage);
+                    }
                     break;
             }
         }
