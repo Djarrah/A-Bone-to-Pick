@@ -18,7 +18,7 @@ public class LevelInformation : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        
+
         Bounds = new Boundary(xRange, zRange);
     }
 }

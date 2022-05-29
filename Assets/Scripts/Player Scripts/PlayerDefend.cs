@@ -23,11 +23,14 @@ public class PlayerDefend : MonoBehaviour
     public bool Defending { get; private set; } = false; // ENCAPSULATION
     bool shieldBroken = false;
 
+    Animator anim;
+
     void Start()
     {
         // initializing variables
         shieldArea = transform.GetChild(0).gameObject;
         playerAttack = GetComponent<PlayerAttack>();
+        anim = GetComponentInChildren<Animator>();
 
         // replenishes shield
         shieldHealth = shieldHealthMax;
@@ -79,8 +82,7 @@ public class PlayerDefend : MonoBehaviour
     {
         Defending = true;
         shieldArea.SetActive(Defending);
-
-        //defend ani
+        anim.SetBool("defending", Defending);
     }
 
     // deactivates shield area
@@ -88,8 +90,7 @@ public class PlayerDefend : MonoBehaviour
     {
         Defending = false;
         shieldArea.SetActive(Defending);
-
-        // return to previous ani
+        anim.SetBool("defending", Defending);
     }
 
     // replenishes shield health every tick, or repairs the shield if broken

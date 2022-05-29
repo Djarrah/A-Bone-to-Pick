@@ -24,7 +24,7 @@ public class MeleeEnemy : Enemy // INHERITANCE
     protected override void Attack()
     {
         base.Attack();
-        
+
         if (
             Physics.Raycast(
                 transform.position,

@@ -5,6 +5,8 @@ using UnityEngine;
 // Parent class for all enemy types
 public abstract class Enemy : MonoBehaviour
 {
+    public bool Dead = false;
+    
     [Header("Movement")]
     [SerializeField] protected float walkSpeed;
     protected float distanceToTarget;
@@ -29,6 +31,9 @@ public abstract class Enemy : MonoBehaviour
 
     private GameObject player;
     private GameManager gameManager;
+    protected Animator animator;
+
+    private Vector3 formerPosition;
 
     // Called before the first frame, when script is initialized
     private void Start()
@@ -37,18 +42,22 @@ public abstract class Enemy : MonoBehaviour
         player = GameObject.Find("Player");
         bounds = LevelInformation.Instance.Bounds;
         gameManager = GameManager.Instance;
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Called at each frame
     private void Update()
     {
         if (!gameManager.GameActive) { return; }
+        if (Dead) { return; }
 
         GetDistance();
 
         MovementRoutine();
 
         AttackRoutine();
+
+        AnimatorStatus();
     }
 
     // Simply sets the distance between Enemy and Player
@@ -62,6 +71,8 @@ public abstract class Enemy : MonoBehaviour
     // If player is not winding up an attack, moves according to its pattern and gets constrained by bounds
     private void MovementRoutine()
     {
+        formerPosition = transform.position;
+        
         if (inWindup) { WindupAttack(); }
         else
         {
@@ -93,7 +104,6 @@ public abstract class Enemy : MonoBehaviour
     protected void Approach()
     {
         transform.position += MoveVector();
-        // forward walk
     }
 
     // Returns a Vector going forward according to speed
@@ -120,6 +130,7 @@ public abstract class Enemy : MonoBehaviour
         else if (PlayerInRange() && !inWindup) // if player is in range and not already winding up...
         {
             inWindup = true; // starts winding up the attack
+            animator.SetTrigger("attack");
         }
     }
 
@@ -133,9 +144,6 @@ public abstract class Enemy : MonoBehaviour
         { 
             transform.LookAt(player.transform); 
         }
-
-        // attack ani
-        // pause move and rotation?
     }
 
     // Recharges the cooldown after an attack
@@ -154,5 +162,12 @@ public abstract class Enemy : MonoBehaviour
     protected bool PlayerInRange()
     {
         return (distanceToTarget <= attackRange);
+    }
+
+    // Determines effective speed for animator purposes
+    void AnimatorStatus()
+    {
+        float velocity = (transform.position - formerPosition).magnitude / Time.deltaTime;
+        animator.SetFloat("velocity", velocity);
     }
 }

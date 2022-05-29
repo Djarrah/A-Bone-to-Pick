@@ -7,10 +7,10 @@ public class PlayerHealth : Health
     // INHERITANCE
 
     // POLYMORPHISM
-
+    // Triggers Game Over
     protected override void Death()
     {
         GameManager.Instance.GameOver();
-        base.Death();
+        animator.SetBool("dead", true);
     }
 }

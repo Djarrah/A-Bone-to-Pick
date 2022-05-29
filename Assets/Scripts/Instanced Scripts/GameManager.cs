@@ -21,18 +21,11 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Score scoreScript;
 
-    public HiScoreEntry RunScore;
+    public HiScoreEntry RunScore { get; private set; } // ENCAPSULATION
 
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
         Instance = this;
-
         DontDestroyOnLoad(this);
     }
 
@@ -55,6 +48,7 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene(0);
+        Destroy(gameObject);
     }
 
     public void GameOver()

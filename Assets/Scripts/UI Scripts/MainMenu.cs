@@ -10,6 +10,13 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameObject optionsScreen;
     [SerializeField] GameObject controlsScreen;
 
+    GameManager gameManager;
+
+    private void Start()
+    {
+        gameManager = GameManager.Instance;
+    }
+
     // Loads the game proper
     public void StartGame()
     {
