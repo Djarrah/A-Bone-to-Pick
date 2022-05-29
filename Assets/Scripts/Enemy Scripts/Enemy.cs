@@ -72,7 +72,9 @@ public abstract class Enemy : MonoBehaviour
     private void MovementRoutine()
     {
         formerPosition = transform.position;
-        
+
+        if (inCooldown) { return; }
+
         if (inWindup) { WindupAttack(); }
         else
         {

@@ -133,7 +133,7 @@ MonoBehaviour:
   walkSpeed: 5
   attackRange: 2
   attackWindup: 0.5
-  attackCooldown: 1
+  attackCooldown: 0.75
   tracking: 0
   damage: 1
   friendlyFire: 1
