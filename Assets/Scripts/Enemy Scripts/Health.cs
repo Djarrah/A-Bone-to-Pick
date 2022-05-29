@@ -18,7 +18,7 @@ public class Health : MonoBehaviour
 
     protected Animator animator;
 
-    protected virtual void Start()
+    private void Start()
     {
         health = maxHealth; // Sets health to full
         animator = GetComponentInChildren<Animator>();

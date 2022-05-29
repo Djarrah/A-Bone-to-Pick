@@ -6,18 +6,9 @@ public class PlayerHealth : Health
 {
     // INHERITANCE
 
-    HealthBar healthBar;
+    [SerializeField] HealthBar healthBar;
 
     // POLYMORPHISM
-    // Adds healthbar settings to the initialization
-    protected override void Start()
-    {
-        base.Start();
-
-        healthBar = HealthBar.Instance;
-        healthBar.SetMaxHealth(health);
-    }
-
     public override void Heal(int amount = 1)
     {
         base.Heal(amount);

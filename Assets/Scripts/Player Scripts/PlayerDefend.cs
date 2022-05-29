@@ -24,7 +24,7 @@ public class PlayerDefend : MonoBehaviour
     bool shieldBroken = false;
 
     Animator anim;
-    ShieldBar shieldBar;
+    [SerializeField] ShieldBar shieldBar;
 
     void Start()
     {
@@ -32,11 +32,9 @@ public class PlayerDefend : MonoBehaviour
         shieldArea = transform.GetChild(0).gameObject;
         playerAttack = GetComponent<PlayerAttack>();
         anim = GetComponentInChildren<Animator>();
-        shieldBar = ShieldBar.Instance;
 
         // replenishes shield
         shieldHealth = shieldHealthMax;
-        shieldBar.SetMaxHealth(shieldHealth);
     }
 
     // Update is called once per frame
