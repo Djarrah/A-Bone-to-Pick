@@ -2252,8 +2252,9 @@ MonoBehaviour:
   potion: {fileID: 4952127157458368113, guid: c73f47cf7b22eda428624fa817d99bc4, type: 3}
   waves:
   - enemyList:
-    - {fileID: 3581528392548665467, guid: 843401216c257ff429289884dbb87390, type: 3}
-    healerInWave: 1
+    - {fileID: 711171229060110480, guid: 76b89ea9f38e3b14b9019fd6938b1e60, type: 3}
+    - {fileID: 711171229060110480, guid: bac1d2da21254bf439e73ba1ac58bd85, type: 3}
+    healerInWave: 0
   enemiesAlive: []
 --- !u!23 &1703836450 stripped
 MeshRenderer:
