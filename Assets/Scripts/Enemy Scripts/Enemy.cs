@@ -35,6 +35,9 @@ public abstract class Enemy : MonoBehaviour
 
     private Vector3 formerPosition;
 
+    AudioSource effectsSource;
+    [SerializeField] AudioClip attackClip;
+
     // Called before the first frame, when script is initialized
     private void Start()
     {
@@ -43,6 +46,7 @@ public abstract class Enemy : MonoBehaviour
         bounds = LevelInformation.Instance.Bounds;
         gameManager = GameManager.Instance;
         animator = GetComponentInChildren<Animator>();
+        effectsSource = GameObject.Find("Effects").GetComponent<AudioSource>();
     }
 
     // Called at each frame
@@ -143,6 +147,8 @@ public abstract class Enemy : MonoBehaviour
         { 
             transform.LookAt(player.transform); 
         }
+
+        effectsSource.PlayOneShot(attackClip);
     }
 
     // Recharges the cooldown after an attack

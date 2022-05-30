@@ -120,6 +120,8 @@ MonoBehaviour:
   - {fileID: 7131857669425426571}
   - {fileID: 7152989209091550817}
   explosion: {fileID: 1213582521571971765, guid: 9e295a8c6a2f50046b9d42b67115d8fe, type: 3}
+  healingClip: {fileID: 8300000, guid: 4e1ff8faed12a475eba9be0e46072269, type: 3}
+  damageClip: {fileID: 8300000, guid: 373bf7a0b81fa3140b2271b4eb858d3d, type: 3}
 --- !u!114 &711171229060110506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,6 +140,7 @@ MonoBehaviour:
   attackWindup: 0.65
   attackCooldown: 3
   tracking: 1
+  attackClip: {fileID: 8300000, guid: cc6699269b4c1d44ea1e860518b9bb73, type: 3}
   projectile: {fileID: 7505032809228470536, guid: f6f42407fb27bfd498f7bc0c88c6d7f9, type: 3}
 --- !u!54 &-4754805511434036567
 Rigidbody:

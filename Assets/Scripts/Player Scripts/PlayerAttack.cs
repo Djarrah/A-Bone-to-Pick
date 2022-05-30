@@ -7,6 +7,10 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField, Tooltip("Duration of the attack")]
     float attackDuration = 0.25f;
     float timer = 0.0f;
+
+    [SerializeField] AudioClip attackClip;
+    [SerializeField] AudioSource effectsSource;
+
     
     /* Legacy section
     [SerializeField, Tooltip("Range of the attack")]
@@ -81,6 +85,7 @@ public class PlayerAttack : MonoBehaviour
     {
         Attacking = true;
         animator.SetTrigger("attacking");
+        effectsSource.PlayOneShot(attackClip);
 
         sword.SetActive(Attacking);
     }

@@ -26,6 +26,10 @@ public class PlayerDefend : MonoBehaviour
     Animator anim;
     [SerializeField] ShieldBar shieldBar;
 
+    [SerializeField] AudioSource effectSource;
+    [SerializeField] AudioClip shieldClip;
+
+
     void Start()
     {
         // initializing variables
@@ -60,6 +64,7 @@ public class PlayerDefend : MonoBehaviour
     {
         shieldHealth -= amount;
         shieldBar.SetHealth(shieldHealth);
+        effectSource.PlayOneShot(shieldClip);
 
         Debug.Log($"Shield Health: {shieldHealth}");
 

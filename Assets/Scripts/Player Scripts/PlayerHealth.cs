@@ -8,6 +8,9 @@ public class PlayerHealth : Health
 
     [SerializeField] HealthBar healthBar;
 
+    [SerializeField] AudioSource musicSource;
+    [SerializeField] AudioClip gameOverClip;
+
     // POLYMORPHISM
     public override void Heal(int amount = 1)
     {
@@ -28,5 +31,7 @@ public class PlayerHealth : Health
     {
         GameManager.Instance.GameOver();
         animator.SetBool("dead", true);
+        musicSource.Stop();
+        musicSource.PlayOneShot(gameOverClip);
     }
 }

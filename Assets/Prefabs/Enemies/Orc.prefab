@@ -119,6 +119,8 @@ MonoBehaviour:
   renderers:
   - {fileID: 2893402354863565253}
   explosion: {fileID: 1213582521571971765, guid: 9e295a8c6a2f50046b9d42b67115d8fe, type: 3}
+  healingClip: {fileID: 8300000, guid: 4e1ff8faed12a475eba9be0e46072269, type: 3}
+  damageClip: {fileID: 8300000, guid: 79577ba19ce26b14091cadef83842225, type: 3}
 --- !u!114 &1156514081280972556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,6 +139,7 @@ MonoBehaviour:
   attackWindup: 0.5
   attackCooldown: 0.75
   tracking: 0
+  attackClip: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
   damage: 1
   friendlyFire: 1
 --- !u!54 &4849163554304370389

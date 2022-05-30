@@ -20,11 +20,17 @@ public class Health : MonoBehaviour
     [SerializeField] GameObject explosion;
     ParticleSystem healingVFX;
 
+    AudioSource effectsSource;
+    [SerializeField] AudioClip healingClip;
+    [SerializeField] AudioClip damageClip;
+
+
     private void Start()
     {
         health = maxHealth; // Sets health to full
         animator = GetComponentInChildren<Animator>();
         healingVFX = GetComponentInChildren<ParticleSystem>();
+        effectsSource = GameObject.Find("Effects").GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -83,6 +89,7 @@ public class Health : MonoBehaviour
         }
 
         healingVFX.Play();
+        effectsSource.PlayOneShot(healingClip);
     }
 
     // depletes the given amount of health
@@ -94,6 +101,7 @@ public class Health : MonoBehaviour
         BlinkRenderers();
 
         health -= amount;
+        effectsSource.PlayOneShot(damageClip);
         Debug.Log($"{name}'s health: {health}");
 
         if (health <= 0) // triggers death if HP reaches 0 or lower

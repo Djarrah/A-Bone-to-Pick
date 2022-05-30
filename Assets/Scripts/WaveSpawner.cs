@@ -23,6 +23,9 @@ public class WaveSpawner : MonoBehaviour
 
     Boundary bounds;
 
+    [SerializeField] AudioSource musicSource;
+    [SerializeField] AudioClip winClip;
+
     private void Start()
     {
         bounds = LevelInformation.Instance.Bounds;
@@ -88,6 +91,8 @@ public class WaveSpawner : MonoBehaviour
             else
             {
                 GameManager.Instance.WinGame();
+                musicSource.Stop();
+                musicSource.PlayOneShot(winClip);
 
                 return;
             }
