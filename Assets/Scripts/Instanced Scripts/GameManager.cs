@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool GameWon = false;
     [HideInInspector] public bool GameLost = false;
 
-    [SerializeField] GameObject pauseText;
     [SerializeField] GameObject gameOverText;
     [SerializeField] GameObject winText;
 
@@ -27,22 +26,6 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
         DontDestroyOnLoad(this);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            PauseGame();
-        }
-    }
-
-    void PauseGame()
-    {
-        if (GameLost || GameWon) { return; }
-        
-        GameActive = !GameActive;
-        pauseText.SetActive(!pauseText.activeSelf);
     }
 
     public void Restart()
