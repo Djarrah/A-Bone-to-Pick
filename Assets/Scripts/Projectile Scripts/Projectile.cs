@@ -10,11 +10,13 @@ public class Projectile : MonoBehaviour
     [SerializeField] int damage = 1;
 
     [SerializeField] float projectileSpeed = 1;
+
+    [SerializeField] GameObject explosion;
     
     private void Update()
     {
         Movement();
-        DestroyOutOfBounds();
+        //DestroyOutOfBounds();
     }
 
     // Damages those who come in contact with the projectile
@@ -46,7 +48,7 @@ public class Projectile : MonoBehaviour
     // The way the projectile pops
     protected void DestroyProjectile()
     {
-        // effects
+        Instantiate(explosion, transform.position, transform.rotation);
         Destroy(gameObject);
     }
     
@@ -56,12 +58,12 @@ public class Projectile : MonoBehaviour
         transform.position += Time.deltaTime * projectileSpeed * transform.forward;
     }
 
-    // Destroys the projectile if it goes out of bounds
-    private void DestroyOutOfBounds()
-    {
-        if (!LevelInformation.Instance.Bounds.IsInBounds(transform.position))
-        {
-            Destroy(gameObject);
-        }
-    }
+    //// Destroys the projectile if it goes out of bounds
+    //private void DestroyOutOfBounds()
+    //{
+    //    if (!LevelInformation.Instance.Bounds.IsInBounds(transform.position))
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
 }

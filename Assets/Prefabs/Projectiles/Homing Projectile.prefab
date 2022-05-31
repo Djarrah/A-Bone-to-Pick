@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1323181346484791853}
   - component: {fileID: 6529704555102129557}
   - component: {fileID: 1095839132570679900}
+  - component: {fileID: -161107201105587543}
   m_Layer: 0
   m_Name: Homing Projectile
   m_TagString: Untagged
@@ -112,7 +113,24 @@ MonoBehaviour:
   friendlyFire: 0
   damage: 1
   projectileSpeed: 5
+  explosion: {fileID: 7819775807870019735, guid: f916833a9285b1244b9a2a6ef531b2a5, type: 3}
   projectileLife: 5
+--- !u!54 &-161107201105587543
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7505032809228470536}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &1498507011990392288
 PrefabInstance:
   m_ObjectHideFlags: 0

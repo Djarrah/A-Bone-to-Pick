@@ -126,11 +126,7 @@ public class Health : MonoBehaviour
 
         yield return new WaitForSeconds(2);
 
-        GameObject deathExplosion = Instantiate(explosion, transform.position, transform.rotation);
-
-        yield return new WaitForSeconds(0.5f);
-
-        Destroy(deathExplosion);
+        Instantiate(explosion, transform.position, transform.rotation);
         gameObject.SetActive(false);
     }
 }

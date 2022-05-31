@@ -20,8 +20,7 @@ public class MainMenu : MonoBehaviour
     // Loads the game proper
     public void StartGame()
     {
-        // Until the arena is finished, we'll use the test scene instead
-        SceneManager.LoadScene(3); // Swap to 1 when arena is finished
+        SceneManager.LoadScene(1);
     }
 
     // loads the global leaderboard

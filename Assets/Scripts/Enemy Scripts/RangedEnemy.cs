@@ -25,7 +25,7 @@ public class RangedEnemy : Enemy // INHERITANCE
         }
         else if (distanceToTarget < attackRange / 2)
         {
-            transform.position -= MoveVector();
+            rb.position -= MoveVector();
             animator.SetFloat("direction", 0);
         }
     }

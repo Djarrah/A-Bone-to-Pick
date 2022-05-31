@@ -27,23 +27,23 @@ public abstract class Enemy : MonoBehaviour
 
     [SerializeField] bool tracking = false;
 
-    private Boundary bounds; // this level's bounds
+    [Header("Audio")]
+    AudioSource effectsSource;
+    [SerializeField] AudioClip attackClip;
 
     private GameObject player;
     private GameManager gameManager;
     protected Animator animator;
+    protected Rigidbody rb;
 
     private Vector3 formerPosition;
-
-    AudioSource effectsSource;
-    [SerializeField] AudioClip attackClip;
 
     // Called before the first frame, when script is initialized
     private void Start()
     {
         // initializing variables
         player = GameObject.Find("Player");
-        bounds = LevelInformation.Instance.Bounds;
+        rb = GetComponent<Rigidbody>();
         gameManager = GameManager.Instance;
         animator = GetComponentInChildren<Animator>();
         effectsSource = GameObject.Find("Effects").GetComponent<AudioSource>();
@@ -53,7 +53,7 @@ public abstract class Enemy : MonoBehaviour
     private void Update()
     {
         AnimatorStatus();
-        formerPosition = transform.position;
+        formerPosition = rb.position;
 
         if (!gameManager.GameActive) { return; }
         if (Dead) { return; }
@@ -80,7 +80,7 @@ public abstract class Enemy : MonoBehaviour
         else
         {
             Movement();
-            Constrain();
+            // Constrain();
         }
     }
 
@@ -106,7 +106,7 @@ public abstract class Enemy : MonoBehaviour
     // Gets closer in the MoveVector direction
     protected void Approach()
     {
-        transform.position += MoveVector();
+        rb.position += MoveVector();
     }
 
     // Returns a Vector going forward according to speed
@@ -116,14 +116,14 @@ public abstract class Enemy : MonoBehaviour
     }
 
     // Constrains the enemy position in the Bounds' borders
-    private void Constrain()
-    {
-        transform.position = new Vector3(
-            Mathf.Clamp(transform.position.x, bounds.xMin, bounds.xMax),
-            transform.position.y,
-            Mathf.Clamp(transform.position.z, bounds.zMin, bounds.zMax)
-            );
-    }
+    //private void Constrain()
+    //{
+    //    transform.position = new Vector3(
+    //        Mathf.Clamp(transform.position.x, bounds.xMin, bounds.xMax),
+    //        transform.position.y,
+    //        Mathf.Clamp(transform.position.z, bounds.zMin, bounds.zMax)
+    //        );
+    //}
 
     // Handles attack behaviour, overridden by Healer Enemies
     protected virtual void AttackRoutine()

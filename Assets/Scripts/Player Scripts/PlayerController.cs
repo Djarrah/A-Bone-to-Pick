@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 
     PlayerAttack playerAttack;
 
-    Boundary bounds;
+    // Boundary bounds;
 
     float horizontalInput;
     float verticalInput;
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
         playerAttack = GetComponent<PlayerAttack>();
         animator = GetComponentInChildren<Animator>();
 
-        bounds = LevelInformation.Instance.Bounds;
+        // bounds = LevelInformation.Instance.Bounds;
     }
 
     // Called once per frame
@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
         // ABSTRACTION
         Rotate();
         Walk();
-        Constrain();
+        // Constrain(); new arena removes the need to constrain movement
     }
 
     // Stores the Inputs into variables for quicker use
@@ -95,12 +95,12 @@ public class PlayerController : MonoBehaviour
     }
 
     // Constrains the player in the given Boundary.
-    void Constrain()
-    {
-        rb.position = new Vector3(
-            Mathf.Clamp(rb.position.x, bounds.xMin, bounds.xMax),
-            rb.position.y,
-            Mathf.Clamp(rb.position.z, bounds.zMin, bounds.zMax)
-            );
-    }
+    //void Constrain()
+    //{
+    //    rb.position = new Vector3(
+    //        Mathf.Clamp(rb.position.x, bounds.xMin, bounds.xMax),
+    //        rb.position.y,
+    //        Mathf.Clamp(rb.position.z, bounds.zMin, bounds.zMax)
+    //        );
+    //}
 }
