@@ -61,6 +61,7 @@ sysinfo.txt
 *.unitypackage
 *.app
 
+
 # Crashlytics generated file
 crashlytics-build.properties
 
@@ -73,3 +74,10 @@ crashlytics-build.properties
 
 # Imported Assets
 /[Aa]ssets/[Ii]mported Assets/
+
+# Finished Builds
+/[Ss]tandalone Builds/
+/[Ww]ebGLBuilds/
+trono.jpg
+Bar.png
+arena.jpg
